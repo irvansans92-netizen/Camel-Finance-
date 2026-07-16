@@ -49,8 +49,42 @@ This was tested end-to-end on OPN Testnet: a deposit of 0.01 tUSDT successfully 
 
 Verify these on the [OPN Testnet Explorer](https://testnet.iopn.tech).
 
+## Testing
+
+The contracts are covered by a Foundry test suite of **14 automated tests**, run against mocked OPNswap infrastructure so they execute quickly and deterministically without needing a live testnet connection.
+
+**Coverage includes:**
+- Correct share minting on first and subsequent deposits (proportional accounting)
+- Withdrawals returning the exact underlying LP amount owed
+- Price-per-share increasing correctly when the vault accrues extra LP tokens (yield)
+- Access control: only the `ZapRouter` can call `depositFor` / `withdrawTo` on the vault
+- Full `zapIn` -> `zapOut` round trip, confirming the user gets back close to their original deposit (within AMM fee tolerance)
+- Revert behavior for zero-amount deposits and over-withdrawal attempts
+- Multiple independent users depositing without interfering with each other's share balances
+
+Run the full suite with:
+
+```bash
+forge test -vv
+```
+
+All 14 tests pass as of the latest commit.
+
+## Live Demo
+
+Try it yourself on OPN Testnet: **[camelfinance.vercel.app](https://camelfinance.vercel.app)**
+
+Connect an injected wallet (e.g. MetaMask) configured for OPN Testnet (Chain ID 984), then deposit tUSDT directly through the UI.
+
 ## How to Use
 
+### Via the frontend (recommended)
+1. Visit [camelfinance.vercel.app](https://camelfinance.vercel.app) and connect your wallet
+2. Enter a tUSDT amount and click **Zap & Deposit**
+3. View your vault shares and position under **My Position**
+4. Click **Zap Out** anytime to withdraw back to tUSDT
+
+### Via direct contract calls
 1. Approve `ZapRouter` to spend your tUSDT
 2. Call `zapIn(amountIn, amountOutMin, deadline)` on `ZapRouter`
 3. Check your shares via `LiquidityVault.balanceOf(yourAddress)`
