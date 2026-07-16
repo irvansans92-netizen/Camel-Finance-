@@ -17,7 +17,7 @@ The easiest way to enter and exit WOPN/tUSDT liquidity on OPN Chain — deposit 
 2. **Vault Shares:** `LiquidityVault` uses a share-based accounting system (similar to ERC4626) so each user's proportional claim on the pooled LP tokens is tracked fairly and transparently.
 3. **Zap Out:** User calls `zapOut` with their share amount. The vault returns the corresponding LP tokens, which `ZapRouter` removes from the OPNswap pool, swaps the resulting WOPN back to tUSDT, and sends the full amount back to the user.
 
-This was tested end-to-end on OPN Testnet: a deposit of 0.01 tUSDT successfully zapped into the pool and back out, with only expected AMM fees as the difference — proving the full deposit/withdraw cycle works correctly.
+This was tested end-to-end on OPN Testnet: a deposit of ~0.52 tUSDT successfully zapped into the pool and back out, with only expected AMM fees as the difference — proving the full deposit/withdraw cycle works correctly.
 
 ## Roadmap
 
@@ -44,8 +44,8 @@ This was tested end-to-end on OPN Testnet: a deposit of 0.01 tUSDT successfully 
 
 ## Proof of Working Cycle (Testnet)
 
-- Zap In tx: `0xd7b2458d36e6f03ce2e58dc7fc79b7216da92f5ddad2de790032e7e55b2413e4`
-- Zap Out tx: `0xf45eef0037a0b54fb5f8d9008bfb40f5d68c0a9c44cfbc28939e31ba6c4eb4da`
+- Zap In tx: `0xfc926b6fa3d123f4ed7e8867cd7e9395e25c391aa371f0fa16481a82eef7153c`
+- Zap Out tx: `0x6cc6dc9df66207c4cec4bc0cfe773ce493c682d2b910dd76ce39b9b783610ef0`
 
 Verify these on the [OPN Testnet Explorer](https://testnet.iopn.tech).
 
