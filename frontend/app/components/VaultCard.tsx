@@ -14,7 +14,7 @@ const VAULT_ABI = [
     outputs: [{ name: "", type: "uint256" }]
   },
   {
-    name: "getPricePerFullShare",
+    name: "pricePerShare",
     type: "function",
     stateMutability: "view",
     inputs: [],
@@ -65,7 +65,7 @@ export default function VaultCard() {
   const { data: pps } = useReadContract({
     address: CONTRACTS.VAULT,
     abi: VAULT_ABI,
-    functionName: "getPricePerFullShare",
+    functionName: "pricePerShare",
   });
 
   const { isSuccess: approveSuccess, isError: approveError } = useWaitForTransactionReceipt({ hash: approveHash });
